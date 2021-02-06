@@ -77,7 +77,7 @@ pipeline {
         }
                 
                 
-stage('Deploy to GKE') {        
+stage('Deploy to dev') {        
              agent {
                 docker { 
                     image 'google/cloud-sdk:latest' 
@@ -105,7 +105,7 @@ stage('Deploy to GKE') {
                     sh 'echo "${GOOGLE_APPLICATION_CREDENTIALS}"' // returns ****
                     sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
                     sh 'gcloud container clusters get-credentials $CLUSTER_NAME --zone $LOCATION --project $PROJECT_ID'
-                    sh 'kubectl set image deployment/clientes-manuelzegarra lab01=$DOCKER_REPOSITORY/$APP-$APP_MODULE:${BUILD_NUMBER}'
+                    sh 'kubectl set image deployment/clientes-ronald-rojas lab01=$DOCKER_REPOSITORY/$APP-$APP_MODULE:${BUILD_NUMBER}'
                 }
             }
 
@@ -165,7 +165,7 @@ stage('Deploy to GKE') {
           
           
           
-          stage('Deploy to GKE QA') {        
+          stage('Deploy to qa') {        
              agent {
                 docker { 
                     image 'google/cloud-sdk:latest' 

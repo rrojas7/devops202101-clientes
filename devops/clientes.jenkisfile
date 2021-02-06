@@ -24,8 +24,10 @@ pipeline {
                 }
             }
         }
-
-        stage('Docker Build') {
+        
+        
+        
+         stage('Docker Build') {
                     agent any
                     steps {
 
@@ -47,9 +49,11 @@ pipeline {
                         sh "docker build --file ./src/main/docker/Dockerfile --tag $DOCKER_REPOSITORY/$APP-$APP_MODULE:${BUILD_NUMBER} ."
                         sh "docker tag $DOCKER_REPOSITORY/$APP-$APP_MODULE:${BUILD_NUMBER}  $DOCKER_REPOSITORY/$APP-$APP_MODULE:latest"
                     }
-          }
+                }
+                
 
-        stage('Docker push') {         
+    
+     stage('Docker push') {         
                 agent any
                 
                 environment {
@@ -71,5 +75,8 @@ pipeline {
 
                 }
         }
+                
+
+        
     }
 }
